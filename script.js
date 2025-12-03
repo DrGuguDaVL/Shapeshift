@@ -4,6 +4,10 @@ function drawShape() {
     const n = parseInt(document.getElementById("numberInput").value);
     const shape = document.getElementById("shape");
 
+    // NEW: get selected color
+    const color = document.getElementById("colorInput").value;
+    shape.style.background = color;  // <─ APPLY COLOR
+
     if (isNaN(n) || n < 1) {
         shape.style.clipPath = "none";
         shape.style.borderRadius = "0";
