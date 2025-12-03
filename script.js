@@ -1,31 +1,3 @@
-document.getElementById("generateBtn").addEventListener("click", drawShape);
-
-function drawShape() {
-    const shapeEl = document.getElementById("shape");
-    const preset = document.getElementById("presetShape").value;
-    const n = parseInt(document.getElementById("numberInput").value);
-    const angle = parseFloat(document.getElementById("angleInput").value) || 0;
-
-    const typed = document.getElementById("colorText").value.trim();
-    const picked = document.getElementById("colorPicker").value;
-    shapeEl.style.background = typed !== "" ? typed : picked;
-
-    shapeEl.style.transform = `rotate(${angle}deg)`;
-
-    let pts = [];
-
-    if (preset !== "none") {
-        pts = shapes[preset];
-    } else if (!isNaN(n) && n >= 3) {
-        pts = generatePolygon(n);
-    } else {
-        shapeEl.style.clipPath = "none";
-        return;
-    }
-
-    const clip = convert(pts);
-    shapeEl.style.clipPath = `polygon(${clip})`;
-}
 
 const WIDTH = 600;
 const HEIGHT = 600;
@@ -134,3 +106,31 @@ const shapes = {
         {x:0,y:-260},{x:180,y:0},{x:0,y:260},{x:-180,y:0}
     ]
 };
+document.getElementById("generateBtn").addEventListener("click", drawShape);
+
+function drawShape() {
+    const shapeEl = document.getElementById("shape");
+    const preset = document.getElementById("presetShape").value;
+    const n = parseInt(document.getElementById("numberInput").value);
+    const angle = parseFloat(document.getElementById("angleInput").value) || 0;
+
+    const typed = document.getElementById("colorText").value.trim();
+    const picked = document.getElementById("colorPicker").value;
+    shapeEl.style.background = typed !== "" ? typed : picked;
+
+    shapeEl.style.transform = `rotate(${angle}deg)`;
+
+    let pts = [];
+
+    if (preset !== "none") {
+        pts = shapes[preset];
+    } else if (!isNaN(n) && n >= 3) {
+        pts = generatePolygon(n);
+    } else {
+        shapeEl.style.clipPath = "none";
+        return;
+    }
+
+    const clip = convert(pts);
+    shapeEl.style.clipPath = `polygon(${clip})`;
+}
