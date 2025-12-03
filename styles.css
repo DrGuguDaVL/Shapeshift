@@ -1,19 +1,23 @@
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 40px;
-    background: #fafafa;
+    background: #111;
+    color: white;
+    padding: 20px;
+}
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 #shape {
-    width: 200px;
-    height: 200px;
-    margin-top: 20px;
+    margin-top: 25px;
+    width: 300px;
+    height: 300px;
     background: #4287f5;
     transition:
         clip-path 0.8s ease-in-out,
-        border-radius 0.8s ease-in-out,
-        background 0.4s ease,
-        transform 0.8s ease-in-out;
-    will-change: clip-path, border-radius, transform;
+        transform 0.8s ease-in-out,
+        background 0.3s ease;
 }
