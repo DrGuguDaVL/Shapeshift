@@ -12,3 +12,9 @@ body {
     background: #4CAF50;
     transition: 0.25s;
 }
+#shape {
+    transition: clip-path 0.6s ease, border-radius 0.6s ease, background 0.3s ease;
+}
+#shape {
+    will-change: clip-path, border-radius;
+}
