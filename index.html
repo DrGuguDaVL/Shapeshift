@@ -1,23 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Shape Generator</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="controls">
-    <label>Sides:</label>
-    <input type="number" id="numberInput" min="1" placeholder="Polygon Sides">
-
-    <label>Angle (deg):</label>
-    <input type="number" id="angleInput" value="0">
-
-    <label>Preset Shape:</label>
     <select id="presetShape">
-        <option value="none">None</option>
+        <option value="none">Custom Polygon</option>
         <option value="rectangle">Rectangle</option>
         <option value="parallelogram">Parallelogram</option>
         <option value="trapezoid">Trapezoid</option>
@@ -34,11 +24,11 @@
         <option value="diamond">Diamond</option>
     </select>
 
-    <label>Color Picker:</label>
-    <input type="color" id="colorPicker" value="#4287f5">
+    <input id="numberInput" type="number" placeholder="Polygon sides (3–100)">
+    <input id="angleInput" type="number" placeholder="Rotation (deg)">
 
-    <label>Or Type Color:</label>
-    <input type="text" id="colorText" placeholder="red / #f00 / rgb()">
+    <input id="colorText" type="text" placeholder="Type a color (optional)">
+    <input id="colorPicker" type="color" value="#ff0000">
 
     <button id="generateBtn">Generate</button>
 </div>
