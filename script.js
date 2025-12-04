@@ -73,21 +73,15 @@ function drawShape() {
     if (n === 2) {
         shape.style.borderRadius = "100px 100px 0 0";
         shape.style.clipPath = "none";
-    -35,13 +76,11 
+        return;
+    }
 
     let points = [];
     for (let i = 0; i < n; i++) {
         const angle = (i / n) * 2 * Math.PI - Math.PI / 2;
         const x = 50 + 50 * Math.cos(angle);
         const y = 50 + 50 * Math.sin(angle);
-        const angleRad = (i / n) * 2 * Math.PI - Math.PI / 2;
-        const x = 50 + 50 * Math.cos(angleRad);
-        const y = 50 + 50 * Math.sin(angleRad);
-        points.push(`${x}% ${y}%`);
+        points.push(`${x}% ${y}`);
     }
-    shape.style.clipPath = `polygon(...)`;
-    shape.style.borderRadius = "...";
-
-    shape.style.clipPath = `polygon(${points.join(",")})`;
-}
+    shape.style.clipPath = `polygon(${points.join(", ")})`;
 }
