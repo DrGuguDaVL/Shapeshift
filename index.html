@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Polygon Generator</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
 <h2>Polygon Generator</h2>
+
+<input id="numberInput" type="number" placeholder="Enter a number">
+<button id="generateBtn">Generate</button>
 
 <label>Number of Sides:</label>
 <input type="number" id="numberInput" min="1" placeholder="e.g. 5">
@@ -30,8 +24,10 @@
 <input type="color" id="colorPicker" value="#4287f5">
 
 <label>Or type a color:</label>
+<input type="text" id="colorText" placeholder="e.g. red, #ff0000, rgb(0,255,100)">
 
 <input type="text" id="colorText" placeholder="red, #f00, rgb()">
+
 <button id="generateBtn">Generate</button>
 
 <div id="shape"></div>

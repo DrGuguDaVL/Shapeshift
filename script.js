@@ -1,5 +1,3 @@
-document.getElementById("generateBtn").addEventListener("click", drawShape);
-
 function drawShape() {
     const n = parseInt(document.getElementById("numberInput").value);
     const angle = parseFloat(document.getElementById("angleInput").value) || 0;
@@ -24,9 +22,8 @@ function drawShape() {
 
         switch (preset) {
             case "rectangle":
-                shape.style.clipPath = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
+                shape.style.clipPath = "none";
                 break;
-
 
             case "parallelogram":
                 shape.style.clipPath = "polygon(20% 0, 100% 0, 80% 100%, 0 100%)";
@@ -56,17 +53,12 @@ function drawShape() {
     }
 
     // POLYGON GENERATION (for triangle, square, pentagon...dodecagon)
-    // Invalid or missing number
-if (!Number.isFinite(n) || n < 1) {
-    Object.assign(shape.style, {
-        clipPath: "none",
-        borderRadius: "0",
-        background: "#ccc",
-        transform: "none"
-    });
-    return;
-}
-
+    if (isNaN(n) || n < 1) {
+        shape.style.clipPath = "none";
+        shape.style.borderRadius = "0";
+        shape.style.background = "#ccc";
+        return;
+    }
 
     // Smooth circle
     if (n === 1) {
@@ -79,14 +71,14 @@ if (!Number.isFinite(n) || n < 1) {
     if (n === 2) {
         shape.style.borderRadius = "100px 100px 0 0";
         shape.style.clipPath = "none";
-        return;
+    function drawShape() {
+    let points = [];
+    for (let i = 0; i < n; i++) {
+        const angleRad = (i / n) * 2 * Math.PI - Math.PI / 2;
+        const x = 50 + 50 * Math.cos(angleRad);
+        const y = 50 + 50 * Math.sin(angleRad);
+        points.push(`${x}% ${y}%`);
     }
 
-    let points = [];
-     for (let i = 0; i < n; i++) {
-         const angle = (i / n) * 2 * Math.PI - Math.PI / 2;
-          const x = 50 + 50 * Math.cos(angle);
-           const y = 50 + 50 * Math.sin(angle);
-            points.push($,{x}% $,{y}); 
-        } 
-        shape.style.clipPath = `polygon(${points.join(", ")})`;}
+    shape.style.clipPath = `polygon(${points.join(",")})`;
+}}}
