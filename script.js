@@ -78,11 +78,10 @@ function drawShape() {
     }
 
     let points = [];
-    for (let i = 0; i < n; i++) {
-        const angle = (i / n) * 2 * Math.PI - Math.PI / 2;
-        const x = 50 + 50 * Math.cos(angle);
-        const y = 50 + 50 * Math.sin(angle);
-        points.push(`${x}% ${y}`);
-    }
-    shape.style.clipPath = `polygon(${points.join(", ")})`;
-}
+     for (let i = 0; i < n; i++) {
+         const angle = (i / n) * 2 * Math.PI - Math.PI / 2;
+          const x = 50 + 50 * Math.cos(angle);
+           const y = 50 + 50 * Math.sin(angle);
+            points.push($,{x}% $,{y}); 
+        } 
+        shape.style.clipPath = `polygon(${points.join(", ")})`;}
