@@ -56,12 +56,17 @@ function drawShape() {
     }
 
     // POLYGON GENERATION (for triangle, square, pentagon...dodecagon)
-    if (isNaN(n) || n < 1) {
-        shape.style.clipPath = "none";
-        shape.style.borderRadius = "0";
-        shape.style.background = "#ccc";
-        return;
-    }
+    // Invalid or missing number
+if (!Number.isFinite(n) || n < 1) {
+    Object.assign(shape.style, {
+        clipPath: "none",
+        borderRadius: "0",
+        background: "#ccc",
+        transform: "none"
+    });
+    return;
+}
+
 
     // Smooth circle
     if (n === 1) {
