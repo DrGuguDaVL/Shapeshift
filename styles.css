@@ -17,4 +17,12 @@ body {
 }
 #shape {
     will-change: clip-path, border-radius;
+    margin-top: 20px;
+    background: #4287f5;
+    transition:
+        clip-path 0.8s ease-in-out,
+        border-radius 0.8s ease-in-out,
+        background 0.4s ease,
+        transform 0.8s ease-in-out;
+    will-change: clip-path, border-radius, transform;
 }
