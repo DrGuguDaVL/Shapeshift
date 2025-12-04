@@ -8,7 +8,8 @@ body {
 #shape {
     width: 200px;
     height: 200px;
-    margin: 40px auto;
-    background: #4CAF50;
-    transition: 0.25s;
+    margin-top: 20px;
+    background: #4287f5;
+    transition:0,25s;
+    will-change: clip-path, border-radius, transform;
 }
