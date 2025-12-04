@@ -1,5 +1,25 @@
-<label>Color:</label>
-<input type="color" id="colorInput" value="#4287f5">
+<label>Number of Sides:</label>
+<input type="number" id="numberInput" min="1" placeholder="e.g. 5">
+
+<label>Angle (degrees):</label>
+<input type="number" id="angleInput" value="0">
+
+<label>Preset Shapes:</label>
+<select id="presetShape">
+    <option value="none">None (use number)</option>
+    <option value="rectangle">Rectangle</option>
+    <option value="parallelogram">Parallelogram</option>
+    <option value="trapezoid">Trapezoid</option>
+    <option value="star">Star</option>
+    <option value="oval">Oval</option>
+    <option value="cross">Cross</option>
+</select>
+
+<label>Pick a color:</label>
+<input type="color" id="colorPicker" value="#4287f5">
+
+<label>Or type a color:</label>
+<input type="text" id="colorText" placeholder="red, #f00, rgb()">
 
 <button id="generateBtn">Generate</button>
 
