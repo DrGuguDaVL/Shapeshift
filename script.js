@@ -1,3 +1,5 @@
+document.getElementById("generateBtn").addEventListener("click", drawShape);
+
 function drawShape() {
     const n = parseInt(document.getElementById("numberInput").value);
     const angle = parseFloat(document.getElementById("angleInput").value) || 0;
