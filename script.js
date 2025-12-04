@@ -36,6 +36,8 @@ function drawShape() {
         const y = 50 + 50 * Math.sin(angle);
         points.push(`${x}% ${y}%`);
     }
+    shape.style.clipPath = `polygon(...)`;
+    shape.style.borderRadius = "...";
 
     shape.style.clipPath = `polygon(${points.join(",")})`;
 }
