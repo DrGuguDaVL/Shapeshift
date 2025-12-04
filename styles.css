@@ -1,12 +1,14 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 40px;
+    background: #fafafa;
+}
+
 #shape {
     width: 200px;
     height: 200px;
-    margin-top: 20px;
-    background: #4287f5;
-    transition:
-        clip-path 0.8s ease-in-out,
-        border-radius 0.8s ease-in-out,
-        background 0.4s ease,
-        transform 0.8s ease-in-out;
-    will-change: clip-path, border-radius, transform;
+    margin: 40px auto;
+    background: #4CAF50;
+    transition: 0.25s;
 }
