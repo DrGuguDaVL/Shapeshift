@@ -1,40 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<label>Number of Sides:</label>
+<input type="number" id="numberInput" min="1" placeholder="e.g. 5">
 
-<div class="controls">
-    <select id="presetShape">
-        <option value="none">Custom Polygon</option>
-        <option value="rectangle">Rectangle</option>
-        <option value="parallelogram">Parallelogram</option>
-        <option value="trapezoid">Trapezoid</option>
-        <option value="oval">Oval</option>
-        <option value="ellipse">Ellipse</option>
-        <option value="oblong">Oblong</option>
-        <option value="star">Star</option>
-        <option value="cross">Cross</option>
-        <option value="heart">Heart</option>
-        <option value="kite">Kite</option>
-        <option value="arrow">Arrow</option>
-        <option value="crescent">Crescent</option>
-        <option value="rhombus">Rhombus</option>
-        <option value="diamond">Diamond</option>
-    </select>
+<label>Angle (degrees):</label>
+<input type="number" id="angleInput" value="0">
 
-    <input id="numberInput" type="number" placeholder="Polygon sides (3–100)">
-    <input id="angleInput" type="number" placeholder="Rotation (deg)">
+<label>Preset Shapes:</label>
+<select id="presetShape">
+    <option value="none">None (use number)</option>
+    <option value="rectangle">Rectangle</option>
+    <option value="parallelogram">Parallelogram</option>
+    <option value="trapezoid">Trapezoid</option>
+    <option value="star">Star</option>
+    <option value="oval">Oval</option>
+    <option value="cross">Cross</option>
+</select>
 
-    <input id="colorText" type="text" placeholder="Type a color (optional)">
-    <input id="colorPicker" type="color" value="#ff0000">
+<label>Pick a color:</label>
+<input type="color" id="colorPicker" value="#4287f5">
 
-    <button id="generateBtn">Generate</button>
-</div>
+<label>Or type a color:</label>
+<input type="text" id="colorText" placeholder="red, #f00, rgb()">
+
+<button id="generateBtn">Generate</button>
 
 <div id="shape"></div>
-
-<script src="script.js"></script>
-</body>
-</html>
