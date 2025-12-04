@@ -73,7 +73,11 @@ function drawShape() {
     if (n === 2) {
         shape.style.borderRadius = "100px 100px 0 0";
         shape.style.clipPath = "none";
-    function drawShape() {
+        return;
+    }
+
+    shape.style.borderRadius = "0";
+
     let points = [];
     for (let i = 0; i < n; i++) {
         const angleRad = (i / n) * 2 * Math.PI - Math.PI / 2;
@@ -83,4 +87,4 @@ function drawShape() {
     }
 
     shape.style.clipPath = `polygon(${points.join(",")})`;
-}}}
+}
