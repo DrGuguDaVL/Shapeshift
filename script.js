@@ -24,7 +24,6 @@ function drawShape() {
 
         switch (preset) {
             case "rectangle":
-                shape.style.borderRadius = "0";
                 shape.style.clipPath = "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
                 break;
 
