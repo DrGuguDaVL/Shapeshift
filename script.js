@@ -55,8 +55,8 @@ function drawShape() {
 
             case "oval":
                 shape.style.clipPath = "none";
-                shape.style.width = "300px";
-                shape.style.height = "180px";
+                shape.style.width = "180px";
+                shape.style.height = "300px";
                 shape.style.borderRadius = "50%";
                 break;
 
