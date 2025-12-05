@@ -17,3 +17,7 @@ body {
     transform 0.8s ease-in-out;
     will-change: clip-path, border-radius, transform;
 }
+#shape {
+    width: 300px;
+    height: 100px;
+}
