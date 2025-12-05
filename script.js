@@ -70,6 +70,38 @@ function drawShape() {
 
         return;
     }
+    if (isNaN(n) || n < 1) {
+        shape.style.clipPath = "none";
+        shape.style.borderRadius = "0";
+        shape.style.background = "#ccc";
+        return;
+    }
+
+    // Smooth circle
+    if (n === 1) {
+        shape.style.borderRadius = "50%";
+        shape.style.clipPath = "none";
+        return;
+    }
+
+    // Semi-circle
+    if (n === 2) {
+        shape.style.borderRadius = "100px 100px 0 0";
+        shape.style.clipPath = "none";
+        return;
+    }
+
+    shape.style.borderRadius = "0";
+
+    let points = [];
+    for (let i = 0; i < n; i++) {
+        const angleRad = (i / n) * 2 * Math.PI - Math.PI / 2;
+        const x = 50 + 50 * Math.cos(angleRad);
+        const y = 50 + 50 * Math.sin(angleRad);
+        points.push(`${x}% ${y}%`);
+    }
+
+    shape.style.clipPath = `polygon(${points.join(",")})`;
 
 
     // --- POLYGON GENERATION --- //
