@@ -21,11 +21,16 @@ function drawShape() {
     // PRESET SHAPES
     if (preset !== "none") {
         shape.style.borderRadius = "0";
+    function setRectangleDimensions(shape) {
+    shape.style.width = "300px";
+    shape.style.height = "100px";
+}
 
         switch (preset) {
-            case "rectangle":
-                shape.style.clipPath = "none";
-                break;
+    case "rectangle":
+        setRectangleDimensions(shape);
+        shape.style.clipPath = "none"; // You can skip this or leave it if needed.
+        break;
 
             case "parallelogram":
                 shape.style.clipPath = "polygon(20% 0, 100% 0, 80% 100%, 0 100%)";
