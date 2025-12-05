@@ -2,7 +2,7 @@ document.getElementById("generateBtn").addEventListener("click", drawShape);
 
 // --- FUNCTIONS --- //
 function setRectangleDimensions(shape) {
-    shape.style.width = "300px";
+    shape.style.width = "250px";
     shape.style.height = "100px";
 }
 
