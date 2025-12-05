@@ -24,7 +24,7 @@ function drawShape() {
 
         switch (preset) {
             case "rectangle":
-                shape.style.clipPath = "rect(0%,0%,100%,50%)";
+                shape.style.clipPath = "none";
                 break;
 
             case "parallelogram":
