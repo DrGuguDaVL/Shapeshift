@@ -54,9 +54,12 @@ function drawShape() {
                 break;
 
             case "oval":
-                resetDimensions(shape);
-                shape.style.borderRadius = "50% / 35%";
+                shape.style.clipPath = "none";
+                shape.style.width = "300px";
+                shape.style.height = "180px";
+                shape.style.borderRadius = "50%";
                 break;
+
 
             case "cross":
                 resetDimensions(shape);
