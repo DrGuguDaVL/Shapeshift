@@ -54,6 +54,7 @@ function drawShape() {
                 break;
 
             case "oval":
+                resetDimensions(shape);
                 shape.style.clipPath = "none";
                 shape.style.width = "180px";
                 shape.style.height = "300px";
@@ -65,6 +66,11 @@ function drawShape() {
                 resetDimensions(shape);
                 shape.style.clipPath =
                     "polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%)";
+                break;
+
+            case "rhombus":
+                resetDimensions(shape);
+                shape.style.clipPath = "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);";
                 break;
         }
 
