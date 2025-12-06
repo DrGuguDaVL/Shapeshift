@@ -71,7 +71,7 @@ function drawShape() {
             case "rhombus":
                 resetDimensions(shape);
                 shape.style.clipPath = 
-                    "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);";
+                    "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
                 break;
         }
 
