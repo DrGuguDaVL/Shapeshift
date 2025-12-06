@@ -78,13 +78,19 @@ function drawShape() {
                 break;
 
             case "heart":
-                resetDimensions(shape);
-                shape.style.borderRadius = "0";
-                shape.style.width = "200px";
-                shape.style.height = "180px";
-                shape.style.clipPath =
-                    "polygon(50% 90%, 35% 80%, 25% 70%, 18% 58%, 15% 47%, 15% 38%, 18% 29%, 25% 22%, 34% 18%, 43% 20%, 50% 27%, 57% 20%, 66% 18%, 75% 22%, 82% 29%, 85% 38%, 85% 47%, 82% 58%, 75% 70%, 65% 80%)";
-                break;
+               resetDimensions(shape);
+               shape.style.borderRadius = "0";
+               shape.style.width = "200px";
+               shape.style.height = "200px"; // more height for real proportions
+
+    // Smooth mathematical heart using Bézier curves
+               shape.style.clipPath = "path('M50 15 \
+        C35 0, 0 20, 18 55 \
+        C30 80, 50 95, 50 95 \
+        C50 95, 70 80, 82 55 \
+        C100 20, 65 0, 50 15 Z')";
+
+               break;
 
         }
 
