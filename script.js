@@ -70,9 +70,9 @@ function drawShape() {
 
             case "rhombus":
                 resetDimensions(shape);
-                shape.style.borderRadius= "0%";
-                shape.style.width= "150px";
-                shape.style.clipPath = "250px";
+                shape.style.borderRadius= "0";
+                shape.style.width= "120px";
+                shape.style.clipPath = "240px";
                     "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
                 break;
         }
