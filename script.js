@@ -71,7 +71,7 @@ function drawShape() {
             case "rhombus":
                 resetDimensions(shape);
 
-                shape.style.width = "120px";   // narrow
+                shape.style.width = "120px";   // narrow 
                 shape.style.height = "240px";  // tall
                 shape.style.borderRadius = "0";
                 shape.style.clipPath =
