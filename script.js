@@ -70,13 +70,22 @@ function drawShape() {
 
             case "rhombus":
                 resetDimensions(shape);
-
                 shape.style.width = "120px";   // narrow 
                 shape.style.height = "240px";  // tall
                 shape.style.borderRadius = "0";
                 shape.style.clipPath =
-    "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
+                    "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
                 break;
+                
+            case "heart":
+                resetDimensions(shape);
+                shape.style.borderRadius = "0";
+                shape.style.width = "180px";
+                shape.style.height = "160px";
+                shape.style.clipPath =
+                    "polygon(50% 80%, 10% 45%, 10% 20%, 30% 5%, 50% 20%, 70% 5%, 90% 20%, 90% 45%)";
+                break;
+
         }
 
         return;
