@@ -78,19 +78,19 @@ function drawShape() {
                 break;
 
             case "heart":
-               resetDimensions(shape);
-               shape.style.borderRadius = "0";
-               shape.style.width = "200px";
-               shape.style.height = "200px"; // more height for real proportions
+                resetDimensions(shape);
+                shape.style.borderRadius = "0";
+                shape.style.width = "200px";
+                shape.style.height = "200px";
 
-    // Smooth mathematical heart using Bézier curves
-               shape.style.clipPath = "path('M50 15 \
-        C35 0, 0 20, 18 55 \
-        C30 80, 50 95, 50 95 \
-        C50 95, 70 80, 82 55 \
-        C100 20, 65 0, 50 15 Z')";
+    // Full-size heart that touches the entire bounding box
+                shape.style.clipPath = "path('M100 190 \C10 120, 0 60, 40 30 \
+        C75 0, 100 20, 100 40 \
+        C100 20, 125 0, 160 30 \
+        C200 60, 190 120, 100 190 Z')";
+        break;
+    
 
-               break;
 
         }
 
