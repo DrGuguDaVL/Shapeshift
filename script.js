@@ -76,14 +76,15 @@ function drawShape() {
                 shape.style.clipPath =
                     "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
                 break;
-                    case "heart":
+            case "heart":
     resetDimensions(shape);
     shape.style.width = "200px";
     shape.style.height = "200px";
     shape.style.borderRadius = "0";
     shape.style.clipPath =
-        "path('M100 180 L20 80 A40 40 0 1 1 100 60 A40 40 0 1 1 180 80 Z')";
+        "polygon(50% 90%, 20% 60%, 10% 40%, 10% 25%, 20% 15%, 35% 15%, 50% 30%, 65% 15%, 80% 15%, 90% 25%, 90% 40%, 80% 60%)";
     break;
+
 
         }
 
