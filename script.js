@@ -81,8 +81,13 @@ function drawShape() {
     shape.style.width = "200px";
     shape.style.height = "200px";
     shape.style.borderRadius = "0";
+
+    // Accurate 200x200 smooth round heart
     shape.style.clipPath =
-        "polygon(50% 90%, 20% 60%, 10% 40%, 10% 25%, 20% 15%, 35% 15%, 50% 30%, 65% 15%, 80% 15%, 90% 25%, 90% 40%, 80% 60%)";
+        "path('M100 180 \
+               C20 120, 20 60, 60 40 \
+               C80 20, 120 20, 140 40 \
+               C180 60, 180 120, 100 180 Z')";
     break;
 
 
