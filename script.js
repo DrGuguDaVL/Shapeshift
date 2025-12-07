@@ -51,10 +51,6 @@ function drawShape() {
                 setRectangleDimensions(shape);
                 break;
 
-            case "heart":
-                drawHeart(shape);
-                break;
-
             case "parallelogram":
                 resetDimensions(shape);
                 shape.style.clipPath = "polygon(20% 0, 100% 0, 80% 100%, 0 100%)";
@@ -95,15 +91,10 @@ function drawShape() {
                     "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
                 break;
 
-    // Full-size heart that touches the entire bounding box
-                shape.style.clipPath = "path('M100 190 \C10 120, 0 60, 40 30 \
-        C75 0, 100 20, 100 40 \
-        C100 20, 125 0, 160 30 \
-        C200 60, 190 120, 100 190 Z')";
-        break;
-    
-
-
+                case "heart":
+                    drawHeart(shape);
+                    break;
+                    
         }
 
         return;
