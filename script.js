@@ -6,6 +6,20 @@ function setRectangleDimensions(shape) {
     shape.style.height = "100px";
 }
 
+function drawHeart(shape) {
+            ctx.beginPath();
+            // Left arc
+            ctx.arc(x - size / 2, y - size / 4, size / 2, Math.PI, 0);
+            // Right arc
+            ctx.arc(x + size / 2, y - size / 4, size / 2, Math.PI, 0);
+            // Connect to the bottom point
+            ctx.lineTo(x, y + size);
+            ctx.closePath();
+
+            ctx.fillStyle = color;
+            ctx.fill();
+        }
+
 function resetDimensions(shape) {
     shape.style.width = "200px";   // default square size for polygons
     shape.style.height = "200px";
@@ -35,6 +49,10 @@ function drawShape() {
         switch (preset) {
             case "rectangle":
                 setRectangleDimensions(shape);
+                break;
+
+            case "heart":
+                drawHeart(shape);
                 break;
 
             case "parallelogram":
@@ -76,12 +94,6 @@ function drawShape() {
                 shape.style.clipPath =
                     "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
                 break;
-
-            case "heart":
-                resetDimensions(shape);
-                shape.style.borderRadius = "0";
-                shape.style.width = "200px";
-                shape.style.height = "200px";
 
     // Full-size heart that touches the entire bounding box
                 shape.style.clipPath = "path('M100 190 \C10 120, 0 60, 40 30 \
