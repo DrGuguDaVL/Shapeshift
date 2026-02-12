@@ -19,6 +19,7 @@ body {
     transform 0.8s ease-in-out;
     will-change: clip-path, border-radius, transform;
 }
+
 #presetShape{
   display: flex;
   align-items: center;
@@ -27,6 +28,39 @@ body {
   padding: 10px 20px;
   background-color: white;
 }
+#colorPicker{
+  display: flex;
+  align-items: center;
+  border: 3px solid #333; /* Bright or contrast border */
+  border-radius: 50px;    /* Rounded corners */
+  padding: 10px 20px;
+  background-color: white;
+}
+#colorText{
+  display: flex;
+  align-items: center;
+  border: 3px solid #333; /* Bright or contrast border */
+  border-radius: 50px;    /* Rounded corners */
+  padding: 10px 20px;
+  background-color: white;
+}
+#numberInput{
+  display: flex;
+  align-items: center;
+  border: 3px solid #333; /* Bright or contrast border */
+  border-radius: 50px;    /* Rounded corners */
+  padding: 10px 20px;
+  background-color: white;
+}
+#angleInput{
+  display: flex;
+  align-items: center;
+  border: 3px solid #333; /* Bright or contrast border */
+  border-radius: 50px;    /* Rounded corners */
+  padding: 10px 20px;
+  background-color: white;
+}
+
 
 .search-input {
   border: none;
