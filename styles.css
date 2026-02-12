@@ -22,7 +22,7 @@ body {
 
 #presetShape{
   display: flex;
-  align-items: center;
+  align-items: left;
   border: 3px solid #333; /* Bright or contrast border */
   border-radius: 50px;    /* Rounded corners */
   padding: 10px 20px;
@@ -30,7 +30,7 @@ body {
 }
 #colorPicker{
   display: flex;
-  align-items: center;
+  align-items: left;
   border: 3px solid #333; /* Bright or contrast border */
   border-radius: 50px;    /* Rounded corners */
   padding: 10px 20px;
@@ -38,7 +38,7 @@ body {
 }
 #colorText{
   display: flex;
-  align-items: center;
+  align-items: left;
   border: 3px solid #333; /* Bright or contrast border */
   border-radius: 50px;    /* Rounded corners */
   padding: 10px 20px;
@@ -46,7 +46,7 @@ body {
 }
 #numberInput{
   display: flex;
-  align-items: center;
+  align-items: left;
   border: 3px solid #333; /* Bright or contrast border */
   border-radius: 50px;    /* Rounded corners */
   padding: 10px 20px;
@@ -54,7 +54,7 @@ body {
 }
 #angleInput{
   display: flex;
-  align-items: center;
+  align-items: left;
   border: 3px solid #333; /* Bright or contrast border */
   border-radius: 50px;    /* Rounded corners */
   padding: 10px 20px;
@@ -69,7 +69,7 @@ body {
   width: 100%;
 }
 
-.search-button {
+#generateBtn{
   background-color: #ff7675; /* Friendly, bright color */
   color: white;
   border: none;
