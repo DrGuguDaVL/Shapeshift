@@ -19,3 +19,33 @@ body {
     transform 0.8s ease-in-out;
     will-change: clip-path, border-radius, transform;
 }
+.search-container {
+  display: flex;
+  align-items: center;
+  border: 3px solid #333; /* Bright or contrast border */
+  border-radius: 50px;    /* Rounded corners */
+  padding: 10px 20px;
+  background-color: white;
+}
+
+.search-input {
+  border: none;
+  outline: none;
+  font-size: 20px;       /* Large font */
+  width: 100%;
+}
+
+.search-button {
+  background-color: #ff7675; /* Friendly, bright color */
+  color: white;
+  border: none;
+  border-radius: 50px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Add a playful hover effect */
+.search-button:hover {
+  transform: scale(1.1);
+  transition: 0.2s;
+}
