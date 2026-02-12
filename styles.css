@@ -19,7 +19,7 @@ body {
     transform 0.8s ease-in-out;
     will-change: clip-path, border-radius, transform;
 }
-.search-container {
+#presetShape{
   display: flex;
   align-items: center;
   border: 3px solid #333; /* Bright or contrast border */
