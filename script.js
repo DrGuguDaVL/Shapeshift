@@ -82,11 +82,8 @@ function drawShape() {
     shape.style.height = "200px";
     shape.style.borderRadius = "0";
 
-    // Realistic, iconic heart shape
-    shape.style.clipPath =
-        "path('M100 172 \
-               C100 172, 180 120, 100 60 \
-               C20 120, 100 172, 100 172 Z')";
+    // Realistic, iconic heart shape using clipPath with a more accurate curve
+    shape.style.clipPath = "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)";
     break;
 
 
