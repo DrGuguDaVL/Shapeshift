@@ -82,8 +82,8 @@ function drawShape() {
     shape.style.height = "200px";
     shape.style.borderRadius = "0";
 
-    // Iconic heart shape using clipPath with precise coordinates
-    shape.style.clipPath = "polygon(50% 0%, 100% 35%, 80% 100%, 50% 75%, 20% 100%, 0% 35%)";
+    // Accurate, classic heart shape
+    shape.style.clipPath = "polygon(50% 0%, 0% 35%, 50% 100%, 100% 35%)";
     break;
 
 
