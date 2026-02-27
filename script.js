@@ -76,8 +76,6 @@ function drawShape() {
                 shape.style.clipPath =
                     "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
                 break;
-            case "heart":
-    resetDimensions(shape);
                 case "heart":
     resetDimensions(shape);
     shape.style.width = "200px";
