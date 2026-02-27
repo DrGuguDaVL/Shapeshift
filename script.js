@@ -78,17 +78,16 @@ function drawShape() {
                 break;
             case "heart":
     resetDimensions(shape);
-    shape.style.width = "200px";
-    shape.style.height = "200px";
-    shape.style.borderRadius = "0";
+                shape.style.width = "200px";
+                shape.style.height = "200px";
+                shape.style.borderRadius = "0";
 
-    // Accurate 200x200 smooth round heart
-    shape.style.clipPath =
-        "path('M100 180 \
-               C20 120, 20 60, 60 40 \
-               C80 20, 120 20, 140 40 \
-               C180 60, 180 120, 100 180 Z')";
-    break;
+    // Realistic, iconic heart shape
+                shape.style.clipPath =
+                "path('M100 172 \
+               C100 172, 180 120, 100 60 \
+               C20 120, 100 172, 100 172 Z')";
+                break;
 
 
         }
