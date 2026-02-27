@@ -84,7 +84,7 @@ function drawShape() {
 
     // Realistic, iconic heart shape
                 shape.style.clipPath =
-                "path('M100 172 \
+                    "path('M100 172 \
                C100 172, 180 120, 100 60 \
                C20 120, 100 172, 100 172 Z')";
                 break;
