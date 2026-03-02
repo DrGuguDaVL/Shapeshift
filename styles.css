@@ -22,7 +22,7 @@ body {
 
 #presetShape{
   display: flex;
-  align-items: left;
+  align-items: center;
   border: 3px solid #333; /* Bright or contrast border */
   border-radius: 50px;    /* Rounded corners */
   padding: 10px 20px;
@@ -30,7 +30,7 @@ body {
 }
 #colorPicker{
   display: flex;
-  align-items: left;
+  align-items: center;
   border: 3px solid #333; /* Bright or contrast border */
   border-radius: 50px;    /* Rounded corners */
   padding: 10px 20px;
