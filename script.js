@@ -11,6 +11,34 @@ function resetDimensions(shape) {
     shape.style.height = "200px";
 }
 
+/**
+ * Draws a heart on a canvas.
+ */
+function drawHeart(ctx, x, y, size, color) {
+    const scale = size / 100;
+
+    ctx.save();
+    ctx.translate(x, y);
+    ctx.scale(scale, scale);
+
+    ctx.beginPath();
+    ctx.moveTo(0, -35);
+
+    // Left side
+    ctx.bezierCurveTo(0, -38, -5, -50, -25, -50);
+    ctx.bezierCurveTo(-55, -50, -55, -12.5, -55, -12.5);
+    ctx.bezierCurveTo(-55, 5, -35, 27, 0, 45);
+
+    // Right side
+    ctx.bezierCurveTo(35, 27, 55, 5, 55, -12.5);
+    ctx.bezierCurveTo(55, -12.5, 55, -50, 25, -50);
+    ctx.bezierCurveTo(10, -50, 0, -38, 0, -35);
+
+    ctx.fillStyle = color;
+    ctx.fill();
+    ctx.restore();
+}
+
 function drawShape() {
     const n = parseInt(document.getElementById("numberInput").value);
     const angle = parseFloat(document.getElementById("angleInput").value) || 0;
@@ -21,16 +49,16 @@ function drawShape() {
     const typed = document.getElementById("colorText").value.trim();
     const picked = document.getElementById("colorPicker").value;
     const color = typed !== "" ? typed : picked;
+
     shape.style.background = color;
 
     // ROTATION
     shape.style.transform = `rotate(${angle}deg)`;
 
-
     // --- PRESETS --- //
     if (preset !== "none") {
         shape.style.borderRadius = "0";
-        shape.style.clipPath = "none"; // reset first
+        shape.style.clipPath = "none";
 
         switch (preset) {
             case "rectangle":
@@ -61,7 +89,6 @@ function drawShape() {
                 shape.style.borderRadius = "50%";
                 break;
 
-
             case "cross":
                 resetDimensions(shape);
                 shape.style.clipPath =
@@ -70,27 +97,27 @@ function drawShape() {
 
             case "rhombus":
                 resetDimensions(shape);
-                shape.style.width = "120px";   // narrow 
-                shape.style.height = "240px";  // tall
+                shape.style.width = "120px";
+                shape.style.height = "240px";
                 shape.style.borderRadius = "0";
                 shape.style.clipPath =
                     "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
                 break;
-                case "kite":
-    resetDimensions(shape);
-    shape.style.width = "200px";
-    shape.style.height = "200px";
-    shape.style.borderRadius = "0";
 
-    // Accurate, classic heart shape
-    shape.style.clipPath = "polygon(50% 0%, 0% 35%, 50% 100%, 100% 35%)";
-    break;
-
-
+            case "kite":
+                resetDimensions(shape);
+                shape.style.width = "200px";
+                shape.style.height = "200px";
+                shape.style.borderRadius = "0";
+                shape.style.clipPath =
+                    "polygon(50% 0%, 0% 35%, 50% 100%, 100% 35%)";
+                break;
         }
 
         return;
     }
+
+    // --- VALIDATION --- //
     if (isNaN(n) || n < 1) {
         shape.style.clipPath = "none";
         shape.style.borderRadius = "0";
@@ -98,7 +125,7 @@ function drawShape() {
         return;
     }
 
-    // Smooth circle
+    // Circle
     if (n === 1) {
         shape.style.borderRadius = "50%";
         shape.style.clipPath = "none";
@@ -114,17 +141,17 @@ function drawShape() {
 
     shape.style.borderRadius = "0";
 
+    // --- POLYGON GENERATION --- //
     let points = [];
+
     for (let i = 0; i < n; i++) {
         const angleRad = (i / n) * 2 * Math.PI - Math.PI / 2;
         const x = 50 + 50 * Math.cos(angleRad);
         const y = 50 + 50 * Math.sin(angleRad);
+
         points.push(`${x}% ${y}%`);
     }
 
+    resetDimensions(shape);
     shape.style.clipPath = `polygon(${points.join(",")})`;
-
-
-    // --- POLYGON GENERATION --- //
-    resetDimensions(shape);  // ensures square base
-    shape.style.clipPath}
+}
