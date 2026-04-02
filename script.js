@@ -1,5 +1,5 @@
 document.getElementById("generateBtn").addEventListener("click", drawShape);
-
+shape.classList.remove("heart");
 // --- FUNCTIONS --- //
 function setRectangleDimensions(shape) {
     shape.style.width = "250px";
@@ -54,7 +54,6 @@ function drawShape() {
 
     // ROTATION
     shape.style.transform = `rotate(${angle}deg)`;
-    shape.classList.remove("heart");
 
     // --- PRESETS --- //
     if (preset !== "none") {
@@ -108,8 +107,10 @@ function drawShape() {
             case "heart":
                 resetDimensions(shape);
                 shape.classList.add("heart");
+
                 shape.style.clipPath = "none";
                 shape.style.borderRadius = "0";
+
                 break;
 
             case "kite":
