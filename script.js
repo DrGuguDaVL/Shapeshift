@@ -54,6 +54,7 @@ function drawShape() {
 
     // ROTATION
     shape.style.transform = `rotate(${angle}deg)`;
+    shape.classList.remove("heart");
 
     // --- PRESETS --- //
     if (preset !== "none") {
@@ -102,6 +103,13 @@ function drawShape() {
                 shape.style.borderRadius = "0";
                 shape.style.clipPath =
                     "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
+                break;
+
+            case "heart":
+                resetDimensions(shape);
+                shape.classList.add("heart");
+                shape.style.clipPath = "none";
+                shape.style.borderRadius = "0";
                 break;
 
             case "kite":
