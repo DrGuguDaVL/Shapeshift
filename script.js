@@ -15,6 +15,7 @@ function resetDimensions(shape) {
  * Draws a heart on a canvas.
  */
 function drawHeart(ctx, x, y, size, color) {
+    resetDimensions(shape);
     const scale = size / 100;
 
     ctx.save();
