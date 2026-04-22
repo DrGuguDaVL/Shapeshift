@@ -108,10 +108,6 @@ function drawShape() {
             case "heart":
                 resetDimensions(shape);
                 shape.classList.add("heart");
-
-                shape.style.clipPath = "none";
-                shape.style.borderRadius = "0";
-
                 break;
 
             case "kite":
