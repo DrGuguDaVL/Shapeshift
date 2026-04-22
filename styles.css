@@ -53,7 +53,12 @@ body {
     left: 100px;
     top: 0;
 }
-
+.heart {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    clip-path: path('M50 15 C50 0 15 0 15 25 C15 50 50 80 50 80 C50 80 85 50 85 25 C85 0 50 0 50 15 Z');
+}
 #presetShape{
   display: flex-start;
   align-items: left;
