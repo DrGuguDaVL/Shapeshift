@@ -11,37 +11,89 @@
 </head>
 <body>
 
-<h2>Polygon Generator</h2>
+<div class="card">
+    <h2>Polygon Generator</h2>
 
-<label>Number of Sides:</label>
-<input type="number" id="numberInput" min="1" placeholder="e.g. 5">
+    <div class="controls-grid">
+        <div class="input-group">
+            <label for="presetShape">Preset Shape</label>
+            <select id="presetShape">
+                <option value="none">Custom Polygon (use sides)</option>
+                <option value="rectangle">Rectangle</option>
+                <option value="parallelogram">Parallelogram</option>
+                <option value="trapezoid">Trapezoid</option>
+                <option value="triangle">Triangle</option>
+                <option value="star">Star</option>
+                <option value="verticalOval">Vertical Oval</option>
+                <option value="cross">Cross</option>
+                <option value="rhombus">Rhombus</option>
+                <option value="heart">Heart</option>
+                <option value="kite">Kite</option>
+                <option value="arrow">Arrow</option>
+                <option value="crescent">Crescent</option>
+                <option value="foil">Foil (Modifiable)</option>
+                <option value="pie">Pie</option>
+                <option value="ring">Ring</option>
+            </select>
+        </div>
 
-<label>Angle (degrees):</label>
-<input type="number" id="angleInput" value="0">
+        <!-- Conditional Triangle Subtypes -->
+        <div class="input-group hidden" id="triangleGroup">
+            <label for="triangleType">Triangle Type</label>
+            <select id="triangleType">
+                <option value="equilateral">Equilateral</option>
+                <option value="isosceles">Isosceles</option>
+                <option value="right">Right-angled</option>
+                <option value="scalene">Scalene</option>
+                <option value="obtuse">Obtuse</option>
+            </select>
+        </div>
 
-<label>Preset Shapes:</label>
-<select id="presetShape">
-    <option value="none">None (use number)</option>
-    <option value="rectangle">Rectangle</option>
-    <option value="parallelogram">Parallelogram</option>
-    <option value="trapezoid">Trapezoid</option>
-    <option value="star">Star</option>
-    <option value="oval">Oval</option>
-    <option value="cross">Cross</option>
-    <option value="rhombus">Rhombus</option>
-    <option value="heart">Heart</option>
-    <option value="kite">Kite</option>
-</select>
+        <!-- Conditional Trapezoid Subtypes -->
+        <div class="input-group hidden" id="trapezoidGroup">
+            <label for="trapezoidType">Trapezoid Type</label>
+            <select id="trapezoidType">
+                <option value="isosceles">Isosceles</option>
+                <option value="right">Right-angled</option>
+                <option value="scalene">Scalene</option>
+            </select>
+        </div>
 
-<label>Pick a color:</label>
-<input type="color" id="colorPicker" value="#4287f5">
+        <!-- Foil Petal Control -->
+        <div class="input-group hidden" id="foilGroup">
+            <label for="foilPetals">Foil Petals / Lobes</label>
+            <input type="number" id="foilPetals" min="3" max="12" value="4">
+        </div>
 
-<label>Or type any color name:</label>
-<input type="text" id="colorText">
+        <div class="input-group" id="sidesGroup">
+            <label for="numberInput">Number of Sides</label>
+            <input type="number" id="numberInput" min="1" max="100" placeholder="e.g. 5">
+        </div>
 
-<button id="generateBtn">Generate</button>
+        <div class="input-group">
+            <label for="angleInput">Angle (degrees)</label>
+            <input type="number" id="angleInput" value="0">
+        </div>
 
-<div id="shape"></div>
+        <div class="input-group">
+            <label for="colorPicker">Pick a color</label>
+            <input type="color" id="colorPicker" value="#4287f5">
+        </div>
+
+        <div class="input-group full-width">
+            <label for="colorText">Or type any color name</label>
+            <input type="text" id="colorText">
+        </div>
+    </div>
+
+    <button id="generateBtn">Generate Shape</button>
+
+    <div class="stage">
+        <svg id="stageSvg" viewBox="0 0 300 300">
+            <path id="morphPath" fill="#4287f5" d="" />
+        </svg>
+    </div>
+</div>
 
 <script src="script.js"></script>
 </body>
