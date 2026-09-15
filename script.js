@@ -1,5 +1,11 @@
 document.getElementById("generateBtn").addEventListener("click", drawShape);
 
+const HEART_SVG = `
+<svg viewBox="0 0 24 24" width="100%" height="100%">
+    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+</svg>
+`;
+
 function setRectangleDimensions(shape) {
     shape.style.width = "250px";
     shape.style.height = "125px";
@@ -16,15 +22,14 @@ function drawShape() {
     const preset = document.getElementById("presetShape").value;
     const shape = document.getElementById("shape");
 
-    // Clean up heart class & reset default dimensions before each frame
-    shape.classList.remove("heart");
+    // Clean up previous SVG or style settings
+    shape.innerHTML = "";
     resetDimensions(shape);
 
     // COLOR SETUP
     const typed = document.getElementById("colorText").value.trim();
     const picked = document.getElementById("colorPicker").value;
     const color = typed !== "" ? typed : picked;
-    shape.style.background = color;
 
     // ROTATION SETUP
     shape.style.transform = `rotate(${angle}deg)`;
@@ -33,6 +38,7 @@ function drawShape() {
     if (preset !== "none") {
         shape.style.borderRadius = "0";
         shape.style.clipPath = "none";
+        shape.style.background = color;
 
         switch (preset) {
             case "rectangle":
@@ -71,9 +77,13 @@ function drawShape() {
                 break;
 
             case "heart":
-    shape.style.clipPath = ""; // Clears inline clip-path so CSS class applies
-    shape.classList.add("heart");
-    break;
+                shape.style.background = "transparent";
+                shape.innerHTML = HEART_SVG;
+                const pathElement = shape.querySelector("path");
+                if (pathElement) {
+                    pathElement.setAttribute("fill", color);
+                }
+                break;
 
             case "kite":
                 shape.style.clipPath =
@@ -85,6 +95,8 @@ function drawShape() {
     }
 
     // --- VALIDATION & CUSTOM POLYGONS --- //
+    shape.style.background = color;
+
     if (isNaN(n) || n < 1) {
         shape.style.clipPath = "none";
         shape.style.borderRadius = "0";
