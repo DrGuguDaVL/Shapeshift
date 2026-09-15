@@ -1,7 +1,7 @@
 body {
     font-family: "ABeeZee", sans-serif;
     font-weight: 400;
-    font-style:normal;
+    font-style: normal;
     text-align: center;
     padding: 40px;
     background: #fafafa;
@@ -11,114 +11,46 @@ body {
     position: relative;
     width: 200px;
     height: 200px;
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
     background: #4287f5;
     transition:
-    clip-path 0.8s ease-in-out,
-    border-radius 0.8s ease-in-out,
-    background 0.4s ease,
-    transform 0.8s ease-in-out;
+        clip-path 0.8s ease-in-out,
+        border-radius 0.8s ease-in-out,
+        background 0.4s ease,
+        transform 0.8s ease-in-out,
+        width 0.4s ease,
+        height 0.4s ease;
     will-change: clip-path, border-radius, transform;
 }
-#shape::before,
-#shape::after {
-    content: none; /* hidden by default */
-}
-#shape.heart::before,
-#shape.heart::after {
-    content: "";
-    position: absolute;
+
+/* Modern Heart Shape using SVG Path Clip */
+#shape.heart {
     width: 200px;
-    height: 180px;
-    background: inherit;
-    border-radius: 50%;
+    height: 200px;
+    clip-path: path('M 100 30 C 100 30 75 0 40 0 C 18 0 0 18 0 40 C 0 75 40 110 100 160 C 160 110 200 75 200 40 C 200 18 182 0 160 0 C 125 0 100 30 100 30 Z');
 }
 
-#shape.heart::before {
-    top: -100px;
-    left: 0;
+#presetShape,
+#colorPicker,
+#colorText,
+#numberInput,
+#angleInput {
+    border: 3px solid #333;
+    border-radius: 50px;
+    padding: 10px 20px;
+    background-color: white;
 }
 
-#shape.heart::after {
-    left: 100px;
-    top: 0;
+#generateBtn {
+    background-color: #ff7675;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 
-#shape::before {
-    top: -100px;
-    left: 0;
-}
-
-#shape::after {
-    left: 100px;
-    top: 0;
-}
-.heart {
-    width: 100px;
-    height: 100px;
-    background-color: red;
-    clip-path: path('M50 15 C50 0 15 0 15 25 C15 50 50 80 50 80 C50 80 85 50 85 25 C85 0 50 0 50 15 Z');
-}
-#presetShape{
-  display: flex-start;
-  align-items: left;
-  border: 3px solid #333; /* Bright or contrast border */
-  border-radius: 50px;    /* Rounded corners */
-  padding: 10px 20px;
-  background-color: white;
-}
-#colorPicker{
-  display: flex-start;
-  align-items:left;
-  border: 3px solid #333; /* Bright or contrast border */
-  border-radius: 50px;    /* Rounded corners */
-  padding: 10px 20px;
-  background-color: white;
-}
-#colorText{
-  display: flex-start;
-  align-items: left;
-  border: 3px solid #333; /* Bright or contrast border */
-  border-radius: 50px;    /* Rounded corners */
-  padding: 10px 20px;
-  background-color: white;
-}
-#numberInput{
-  display: flex-start;
-  align-items: left;
-  border: 3px solid #333; /* Bright or contrast border */
-  border-radius: 50px;    /* Rounded corners */
-  padding: 10px 20px;
-  background-color: white;
-}
-#angleInput{
-  display: flex-start;
-  align-items: left;
-  border: 3px solid #333; /* Bright or contrast border */
-  border-radius: 50px;    /* Rounded corners */
-  padding: 10px 20px;
-  background-color: white;
-}
-
-
-.search-input {
-  border: none;
-  outline: none;
-  font-size: 20px;       /* Large font */
-  width: 100%;
-}
-
-#generateBtn{
-  background-color: #ff7675; /* Friendly, bright color */
-  color: white;
-  border: none;
-  border-radius: 50px;
-  padding: 10px 20px;
-  cursor: pointer;
-}
-
-/* Add a playful hover effect */
-.search-button:hover {
-  transform: scale(1.1);
-  transition: 0.2s;
+#generateBtn:hover {
+    transform: scale(1.1);
+    transition: 0.2s;
 }

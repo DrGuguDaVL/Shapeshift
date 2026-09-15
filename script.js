@@ -1,43 +1,13 @@
 document.getElementById("generateBtn").addEventListener("click", drawShape);
-shape.classList.remove("heart");
-// --- FUNCTIONS --- //
+
 function setRectangleDimensions(shape) {
     shape.style.width = "250px";
-    shape.style.height = "100px";
+    shape.style.height = "125px";
 }
 
 function resetDimensions(shape) {
-    shape.style.width = "200px";   // default square size for polygons
+    shape.style.width = "200px";
     shape.style.height = "200px";
-}
-
-/**
- * Draws a heart on a canvas.
- */
-function drawHeart(ctx, x, y, size, color) {
-    resetDimensions(shape);
-    const scale = size / 100;
-
-    ctx.save();
-    ctx.translate(x, y);
-    ctx.scale(scale, scale);
-
-    ctx.beginPath();
-    ctx.moveTo(0, -35);
-
-    // Left side
-    ctx.bezierCurveTo(0, -38, -5, -50, -25, -50);
-    ctx.bezierCurveTo(-55, -50, -55, -12.5, -55, -12.5);
-    ctx.bezierCurveTo(-55, 5, -35, 27, 0, 45);
-
-    // Right side
-    ctx.bezierCurveTo(35, 27, 55, 5, 55, -12.5);
-    ctx.bezierCurveTo(55, -12.5, 55, -50, 25, -50);
-    ctx.bezierCurveTo(10, -50, 0, -38, 0, -35);
-
-    ctx.fillStyle = color;
-    ctx.fill();
-    ctx.restore();
 }
 
 function drawShape() {
@@ -46,14 +16,17 @@ function drawShape() {
     const preset = document.getElementById("presetShape").value;
     const shape = document.getElementById("shape");
 
-    // COLOR
+    // Clean up heart class & reset default dimensions before each frame
+    shape.classList.remove("heart");
+    resetDimensions(shape);
+
+    // COLOR SETUP
     const typed = document.getElementById("colorText").value.trim();
     const picked = document.getElementById("colorPicker").value;
     const color = typed !== "" ? typed : picked;
-
     shape.style.background = color;
 
-    // ROTATION
+    // ROTATION SETUP
     shape.style.transform = `rotate(${angle}deg)`;
 
     // --- PRESETS --- //
@@ -67,54 +40,41 @@ function drawShape() {
                 break;
 
             case "parallelogram":
-                resetDimensions(shape);
                 shape.style.clipPath = "polygon(20% 0, 100% 0, 80% 100%, 0 100%)";
                 break;
 
             case "trapezoid":
-                resetDimensions(shape);
                 shape.style.clipPath = "polygon(20% 0, 80% 0, 100% 100%, 0 100%)";
                 break;
 
             case "star":
-                resetDimensions(shape);
                 shape.style.clipPath =
                     "polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%)";
                 break;
 
             case "oval":
-                resetDimensions(shape);
-                shape.style.clipPath = "none";
-                shape.style.width = "180px";
-                shape.style.height = "300px";
+                shape.style.width = "220px";
+                shape.style.height = "140px";
                 shape.style.borderRadius = "50%";
                 break;
 
             case "cross":
-                resetDimensions(shape);
                 shape.style.clipPath =
                     "polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%, 65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%)";
                 break;
 
             case "rhombus":
-                resetDimensions(shape);
-                shape.style.width = "120px";
-                shape.style.height = "240px";
-                shape.style.borderRadius = "0";
+                shape.style.width = "140px";
+                shape.style.height = "220px";
                 shape.style.clipPath =
                     "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)";
                 break;
 
             case "heart":
-                resetDimensions(shape);
                 shape.classList.add("heart");
                 break;
 
             case "kite":
-                resetDimensions(shape);
-                shape.style.width = "200px";
-                shape.style.height = "200px";
-                shape.style.borderRadius = "0";
                 shape.style.clipPath =
                     "polygon(50% 0%, 0% 35%, 50% 100%, 100% 35%)";
                 break;
@@ -123,7 +83,7 @@ function drawShape() {
         return;
     }
 
-    // --- VALIDATION --- //
+    // --- VALIDATION & CUSTOM POLYGONS --- //
     if (isNaN(n) || n < 1) {
         shape.style.clipPath = "none";
         shape.style.borderRadius = "0";
@@ -147,7 +107,7 @@ function drawShape() {
 
     shape.style.borderRadius = "0";
 
-    // --- POLYGON GENERATION --- //
+    // Regular N-sided polygon calculation
     let points = [];
 
     for (let i = 0; i < n; i++) {
@@ -158,6 +118,5 @@ function drawShape() {
         points.push(`${x}% ${y}%`);
     }
 
-    resetDimensions(shape);
     shape.style.clipPath = `polygon(${points.join(",")})`;
 }
