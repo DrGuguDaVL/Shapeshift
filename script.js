@@ -16,22 +16,45 @@ function resetDimensions(shape) {
     shape.style.height = "200px";
 }
 
-function drawShape() {
+// Busca a cor em uma API externa que reconhece milhares de nomes de cores
+async function getSelectedColor() {
+    const typed = document.getElementById("colorText").value.trim().toLowerCase();
+    const picked = document.getElementById("colorPicker").value;
+
+    if (typed === "") {
+        return picked;
+    }
+
+    try {
+        // API pública de nomes de cores (contém mais de 30.000 nomes)
+        const response = await fetch(`https://api.color.graphics/name/${encodeURIComponent(typed)}`);
+        
+        if (response.ok) {
+            const data = await response.json();
+            if (data && data.hex) {
+                return `#${data.hex}`;
+            }
+        }
+    } catch (error) {
+        console.log("API offline, usando fallback local.");
+    }
+
+    // Se a API não encontrar ou estiver offline, usa o texto digitado (para hex, rgb ou cores CSS padrão)
+    return typed;
+}
+
+async function drawShape() {
     const n = parseInt(document.getElementById("numberInput").value);
     const angle = parseFloat(document.getElementById("angleInput").value) || 0;
     const preset = document.getElementById("presetShape").value;
     const shape = document.getElementById("shape");
 
-    // Clean up previous SVG or style settings
     shape.innerHTML = "";
     resetDimensions(shape);
 
-    // COLOR SETUP
-    const typed = document.getElementById("colorText").value.trim();
-    const picked = document.getElementById("colorPicker").value;
-    const color = typed !== "" ? typed : picked;
+    // Aguarda a busca da cor na API
+    const color = await getSelectedColor();
 
-    // ROTATION SETUP
     shape.style.transform = `rotate(${angle}deg)`;
 
     // --- PRESETS --- //
@@ -104,14 +127,12 @@ function drawShape() {
         return;
     }
 
-    // Circle
     if (n === 1) {
         shape.style.borderRadius = "50%";
         shape.style.clipPath = "none";
         return;
     }
 
-    // Semi-circle
     if (n === 2) {
         shape.style.borderRadius = "100px 100px 0 0";
         shape.style.clipPath = "none";
@@ -120,7 +141,6 @@ function drawShape() {
 
     shape.style.borderRadius = "0";
 
-    // Regular N-sided polygon calculation
     let points = [];
 
     for (let i = 0; i < n; i++) {
