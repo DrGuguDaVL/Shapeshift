@@ -71,8 +71,9 @@ function drawShape() {
                 break;
 
             case "heart":
-                shape.classList.add("heart");
-                break;
+    shape.style.clipPath = ""; // Clears inline clip-path so CSS class applies
+    shape.classList.add("heart");
+    break;
 
             case "kite":
                 shape.style.clipPath =

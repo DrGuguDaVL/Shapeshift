@@ -24,10 +24,22 @@ body {
 }
 
 /* Modern Heart Shape using SVG Path Clip */
+/* Reliable Cross-Browser Heart Shape */
 #shape.heart {
     width: 200px;
     height: 200px;
-    clip-path: path('M 100 30 C 100 30 75 0 40 0 C 18 0 0 18 0 40 C 0 75 40 110 100 160 C 160 110 200 75 200 40 C 200 18 182 0 160 0 C 125 0 100 30 100 30 Z');
+    clip-path: polygon(
+        50% 15%, 
+        65% 0%, 
+        85% 0%, 
+        100% 15%, 
+        100% 35%, 
+        50% 95%, 
+        0% 35%, 
+        0% 15%, 
+        15% 0%, 
+        35% 0%
+    );
 }
 
 #presetShape,
