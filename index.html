@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Polygon Generator</title>
+    <title>Gerador de Polígonos</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,100 +12,100 @@
 <body>
 
 <div class="card">
-    <h2>Polygon Generator</h2>
+    <h2>Gerador de Polígonos</h2>
 
     <div class="controls-grid">
         <div class="input-group">
-            <label for="presetShape">Preset Shape</label>
+            <label for="presetShape">Forma predefinida</label>
             <select id="presetShape">
-                <option value="none">Custom Polygon (use sides)</option>
-                <option value="square">Square</option>
-                <option value="rectangle">Rectangle</option>
-                <option value="circle">Circle</option>
-                <option value="semicircle">Semicircle</option>
-                <option value="oval">Oval</option>
-                <option value="parallelogram">Parallelogram</option>
-                <option value="trapezoid">Trapezoid</option>
-                <option value="triangle">Triangle</option>
-                <option value="star">Star (Modifiable)</option>
-                <option value="cross">Cross</option>
-                <option value="rhombus">Rhombus</option>
-                <option value="diamond">Diamond ♦</option>
-                <option value="heart">Heart ♥</option>
-                <option value="club">Club ♣</option>
-                <option value="spade">Spade ♠</option>
-                <option value="drop">Water Drop</option>
-                <option value="kite">Kite</option>
-                <option value="arrow">Arrow</option>
-                <option value="crescent">Crescent</option>
-                <option value="foil">Foil (Modifiable)</option>
-                <option value="pie">Pie (Variable %)</option>
-                <option value="ring">Ring (Modifiable %)</option>
+                <option value="none">Polígono personalizado (usar lados)</option>
+                <option value="square">Quadrado</option>
+                <option value="rectangle">Retângulo</option>
+                <option value="circle">Círculo</option>
+                <option value="semicircle">Semicírculo</option>
+                <option value="oval">Óvalo</option>
+                <option value="parallelogram">Paralelogramo</option>
+                <option value="trapezoid">Trapézio</option>
+                <option value="triangle">Triângulo</option>
+                <option value="star">Estrela (Modificável)</option>
+                <option value="cross">Cruz</option>
+                <option value="rhombus">Losango</option>
+                <option value="diamond">Ouro / Diamante ♦</option>
+                <option value="heart">Coração ♥</option>
+                <option value="club">Clube ♣</option>
+                <option value="spade">Espada ♠</option>
+                <option value="drop">Gota de Água</option>
+                <option value="kite">Pipa / Pipas</option>
+                <option value="arrow">Seta</option>
+                <option value="crescent">Crescente</option>
+                <option value="foil">Folhado / Pétalas</option>
+                <option value="pie">Torta (Percentual)</option>
+                <option value="ring" selected>Anel (Percentual Modificável)</option>
             </select>
         </div>
 
         <div class="input-group hidden" id="triangleGroup">
-            <label for="triangleType">Triangle Type</label>
+            <label for="triangleType">Tipo de Triângulo</label>
             <select id="triangleType">
-                <option value="equilateral">Equilateral</option>
-                <option value="isosceles">Isosceles</option>
-                <option value="right">Right-angled</option>
-                <option value="scalene">Scalene</option>
-                <option value="obtuse">Obtuse</option>
+                <option value="equilateral">Equilátero</option>
+                <option value="isosceles">Isósceles</option>
+                <option value="right">Retângulo</option>
+                <option value="scalene">Escaleno</option>
+                <option value="obtuse">Obtusângulo</option>
             </select>
         </div>
 
         <div class="input-group hidden" id="trapezoidGroup">
-            <label for="trapezoidType">Trapezoid Type</label>
+            <label for="trapezoidType">Tipo de Trapézio</label>
             <select id="trapezoidType">
-                <option value="isosceles">Isosceles</option>
-                <option value="right">Right-angled</option>
-                <option value="scalene">Scalene</option>
+                <option value="isosceles">Isósceles</option>
+                <option value="right">Retângulo</option>
+                <option value="scalene">Escaleno</option>
             </select>
         </div>
 
         <div class="input-group hidden" id="foilGroup">
-            <label for="foilPetals">Foil Petals / Lobes</label>
+            <label for="foilPetals">Número de Pétalas</label>
             <input type="number" id="foilPetals" min="3" max="12" value="4">
         </div>
 
         <div class="input-group hidden" id="starGroup">
-            <label for="starSpikes">Star Points / Spikes</label>
+            <label for="starSpikes">Pontas da Estrela</label>
             <input type="number" id="starSpikes" min="3" max="20" value="5">
         </div>
 
         <div class="input-group hidden" id="pieGroup">
-            <label for="piePercent">Pie Fill Percentage (%)</label>
+            <label for="piePercent">Preenchimento da Torta (%)</label>
             <input type="number" id="piePercent" min="1" max="100" value="75">
         </div>
 
-        <div class="input-group hidden" id="ringGroup">
-            <label for="ringInnerPercent">Inner Radius (% of size)</label>
+        <div class="input-group" id="ringGroup">
+            <label for="ringInnerPercent">Raio interno (% do tamanho)</label>
             <input type="number" id="ringInnerPercent" min="10" max="90" value="50">
         </div>
 
-        <div class="input-group" id="sidesGroup">
-            <label for="numberInput">Number of Sides</label>
-            <input type="number" id="numberInput" min="1" max="100" placeholder="e.g. 5">
+        <div class="input-group hidden" id="sidesGroup">
+            <label for="numberInput">Número de lados</label>
+            <input type="number" id="numberInput" min="1" max="100" placeholder="Exemplo 5">
         </div>
 
         <div class="input-group">
-            <label for="angleInput">Angle (degrees)</label>
+            <label for="angleInput">Ângulo (graus)</label>
             <input type="number" id="angleInput" value="0">
         </div>
 
         <div class="input-group">
-            <label for="colorPicker">Pick a color</label>
+            <label for="colorPicker">Escolha uma cor</label>
             <input type="color" id="colorPicker" value="#4287f5">
         </div>
 
         <div class="input-group full-width">
-            <label for="colorText">Or type any color name</label>
-            <input type="text" id="colorText" placeholder="rose, cerulean, periwinkle, emerald...">
+            <label for="colorText">Ou digite o nome de qualquer cor.</label>
+            <input type="text" id="colorText" placeholder="rosa, azul-celeste, pervinca, esmeralda...">
         </div>
     </div>
 
-    <button id="generateBtn">Generate Shape</button>
+    <button id="generateBtn">Gerar forma</button>
 
     <div class="stage">
         <svg id="stageSvg" viewBox="0 0 300 300">
@@ -114,16 +114,16 @@
     </div>
 
     <div class="copy-section">
-        <span class="copy-title">Copy Output</span>
+        <span class="copy-title">Copiar Código</span>
         <div class="copy-buttons">
-            <button id="copyDPathBtn" class="copy-btn">Copy Path Data (`d`)</button>
-            <button id="copySvgBtn" class="copy-btn">Copy SVG Code</button>
-            <button id="copyCssBtn" class="copy-btn">Copy CSS Clip-Path</button>
+            <button id="copyDPathBtn" class="copy-btn">Copiar Dados do Caminho (`d`)</button>
+            <button id="copySvgBtn" class="copy-btn">Copiar Código SVG</button>
+            <button id="copyCssBtn" class="copy-btn">Copiar CSS Clip-Path</button>
         </div>
     </div>
 </div>
 
-<div id="toast" class="toast hidden">Copied to clipboard!</div>
+<div id="toast" class="toast hidden">Copiado para a área de transferência!</div>
 
 <script src="script.js"></script>
 </body>
