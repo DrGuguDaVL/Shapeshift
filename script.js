@@ -7,6 +7,7 @@ const presetSelect = document.getElementById("presetShape");
 const triangleGroup = document.getElementById("triangleGroup");
 const trapezoidGroup = document.getElementById("trapezoidGroup");
 const foilGroup = document.getElementById("foilGroup");
+const pieGroup = document.getElementById("pieGroup");
 const sidesGroup = document.getElementById("sidesGroup");
 
 // Handle Dynamic Controls Visibility
@@ -16,25 +17,23 @@ presetSelect.addEventListener("change", () => {
     triangleGroup.classList.toggle("hidden", val !== "triangle");
     trapezoidGroup.classList.toggle("hidden", val !== "trapezoid");
     foilGroup.classList.toggle("hidden", val !== "foil");
+    pieGroup.classList.toggle("hidden", val !== "pie");
     sidesGroup.classList.toggle("hidden", val !== "none");
 });
 
 document.getElementById("triangleType").addEventListener("change", drawShape);
 document.getElementById("trapezoidType").addEventListener("change", drawShape);
 document.getElementById("foilPetals").addEventListener("input", drawShape);
+document.getElementById("piePercent").addEventListener("input", drawShape);
 document.getElementById("generateBtn").addEventListener("click", drawShape);
 
-// Interpolate smooth cubic curves dynamically
+// Interpolate smooth bezier/SVG paths into uniform sample points
 function sampleBezierPath(dString, sampleCount = 120) {
-    const canvas = document.createElement("canvas");
-    const ctx = canvas.getContext("2d");
-    const path = new Path2D(dString);
-
-    const points = [];
     const svgPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
     svgPath.setAttribute("d", dString);
     const totalLength = svgPath.getTotalLength();
 
+    const points = [];
     for (let i = 0; i < sampleCount; i++) {
         const pt = svgPath.getPointAtLength((i / sampleCount) * totalLength);
         points.push([pt.x, pt.y]);
@@ -42,7 +41,7 @@ function sampleBezierPath(dString, sampleCount = 120) {
     return points;
 }
 
-// Convert points to Path Data String
+// Convert sampled points back to SVG path format
 function pointsToSVGPath(points) {
     if (!points.length) return "";
     let d = `M ${points[0][0].toFixed(2)} ${points[0][1].toFixed(2)}`;
@@ -67,8 +66,17 @@ function getShapePoints() {
     }
 
     switch (preset) {
+        case "square":
+            return generateRectPoints(cx, cy, 140, 140);
+
         case "rectangle":
             return generateRectPoints(cx, cy, 220, 120);
+
+        case "circle":
+            return generateCirclePoints(cx, cy, 85, 120);
+
+        case "semicircle":
+            return generateSemicirclePoints(cx, cy, 85, 120);
 
         case "verticalOval":
             return generateOvalPoints(cx, cy, 65, 110, 120);
@@ -122,6 +130,24 @@ function getShapePoints() {
             return sampleBezierPath(pathStr, 120);
         }
 
+        case "club": {
+            const pathStr = "M 150 150 C 120 150 110 100 130 80 C 145 60 170 80 150 100 C 170 80 200 110 180 135 C 160 160 150 150 150 150 C 175 160 185 200 160 210 C 140 220 125 180 150 150 C 130 170 100 160 110 130 C 120 100 150 150 150 150 M 145 160 L 130 230 L 170 230 L 155 160 Z";
+            return sampleBezierPath(pathStr, 120);
+        }
+
+        case "spade": {
+            const pathStr = "M 150 30 C 220 120 230 170 180 200 C 150 220 150 175 150 175 C 150 175 150 220 120 200 C 70 170 80 120 150 30 Z M 145 160 L 125 230 L 175 230 L 155 160 Z";
+            return sampleBezierPath(pathStr, 120);
+        }
+
+        case "diamond":
+            return [[cx, cy - 110], [cx + 80, cy], [cx, cy + 110], [cx - 80, cy]];
+
+        case "drop": {
+            const pathStr = "M 150 40 C 230 150 220 240 150 240 C 80 240 70 150 150 40 Z";
+            return sampleBezierPath(pathStr, 120);
+        }
+
         case "crescent": {
             const pathStr = "M 150 40 A 100 100 0 1 0 250 180 A 85 85 0 1 1 150 40 Z";
             return sampleBezierPath(pathStr, 120);
@@ -132,18 +158,18 @@ function getShapePoints() {
             return generateFoilPoints(cx, cy, petals, 85, 30, 120);
         }
 
-        case "pie":
-            return generatePiePoints(cx, cy, 90, 0, 260, 120);
-
-        case "ring": {
-            const pathStr = "M 150 40 A 110 110 0 1 0 150 260 A 110 110 0 1 0 150 40 Z M 150 85 A 65 65 0 1 1 150 215 A 65 65 0 1 1 150 85 Z";
-            return sampleBezierPath(pathStr, 120);
+        case "pie": {
+            const pct = Math.min(Math.max(parseFloat(document.getElementById("piePercent").value) || 75, 1), 100);
+            return generatePiePoints(cx, cy, 90, pct, 120);
         }
+
+        case "ring":
+            return generateRingPoints(cx, cy, 95, 55, 120);
     }
     return generatePolygonPoints(4, cx, cy, 80);
 }
 
-// Helper Point Generators
+// Helper Generators
 function generatePolygonPoints(n, cx, cy, r) {
     const pts = [];
     for (let i = 0; i < n; i++) {
@@ -208,18 +234,39 @@ function generateFoilPoints(cx, cy, petals, rBase, amp, count) {
     return pts;
 }
 
-function generatePiePoints(cx, cy, r, startAngleDeg, endAngleDeg, count) {
+function generatePiePoints(cx, cy, r, percent, count) {
     const pts = [[cx, cy]];
-    const startRad = (startAngleDeg * Math.PI) / 180 - Math.PI / 2;
-    const endRad = (endAngleDeg * Math.PI) / 180 - Math.PI / 2;
-    for (let i = 0; i <= count; i++) {
-        const a = startRad + (i / count) * (endRad - startRad);
+    const sweepRad = (percent / 100) * 2 * Math.PI;
+    const startRad = -Math.PI / 2;
+
+    for (let i = 0; i <= count - 1; i++) {
+        const a = startRad + (i / (count - 1)) * sweepRad;
         pts.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]);
     }
     return pts;
 }
 
-// Normalize Array sizes to equalize path resolution for smooth morphing
+// Seamless Donut Ring without open end-points
+function generateRingPoints(cx, cy, outerR, innerR, count) {
+    const pts = [];
+    const half = Math.floor(count / 2);
+
+    // Outer Circle Loop (Clockwise)
+    for (let i = 0; i < half; i++) {
+        const a = (i / half) * 2 * Math.PI;
+        pts.push([cx + outerR * Math.cos(a), cy + outerR * Math.sin(a)]);
+    }
+
+    // Inner Circle Loop (Counter-clockwise to create a hole)
+    for (let i = 0; i < half; i++) {
+        const a = (1 - i / half) * 2 * Math.PI;
+        pts.push([cx + innerR * Math.cos(a), cy + innerR * Math.sin(a)]);
+    }
+
+    return pts;
+}
+
+// Resample points array evenly to maintain morphing fidelity across frames
 function resamplePoints(points, targetCount = 120) {
     if (!points.length) return [];
     const resampled = [];
@@ -237,7 +284,7 @@ function resamplePoints(points, targetCount = 120) {
     return resampled;
 }
 
-// Dynamic Color Fetch API
+// Color Lookup via Color Graphics API
 async function getSelectedColor() {
     const typed = document.getElementById("colorText").value.trim().toLowerCase();
     const picked = document.getElementById("colorPicker").value;
@@ -257,7 +304,7 @@ async function getSelectedColor() {
     return typed;
 }
 
-// Master Render & Interpolated Transition Execution
+// Main Draw and Dynamic Frame Morphing Engine
 async function drawShape() {
     const targetRawPoints = getShapePoints();
     const targetPoints = resamplePoints(targetRawPoints, 120);
@@ -268,25 +315,22 @@ async function drawShape() {
     morphPath.style.transform = `rotate(${angle}deg)`;
     morphPath.style.fill = color;
 
-    // Set initial frame if first load
     if (!currentPathPoints.length) {
         currentPathPoints = targetPoints;
         morphPath.setAttribute("d", pointsToSVGPath(currentPathPoints));
         return;
     }
 
-    // Smooth Tween Interpolation Loop
     if (animFrameId) cancelAnimationFrame(animFrameId);
 
     const startTime = performance.now();
-    const duration = 800; // 0.8 seconds
+    const duration = 800;
     const startPoints = currentPathPoints;
 
     function animateFrame(now) {
         const elapsed = now - startTime;
         let progress = Math.min(elapsed / duration, 1);
 
-        // Smooth Cubic Easing Function
         const ease = progress < 0.5
             ? 4 * progress * progress * progress
             : 1 - Math.pow(-2 * progress + 2, 3) / 2;
@@ -311,5 +355,5 @@ async function drawShape() {
     animFrameId = requestAnimationFrame(animateFrame);
 }
 
-// Initialize on Load
+// Initialize App
 drawShape();
