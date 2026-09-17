@@ -8,6 +8,7 @@ const trapezoidGroup = document.getElementById("trapezoidGroup");
 const foilGroup = document.getElementById("foilGroup");
 const starGroup = document.getElementById("starGroup");
 const pieGroup = document.getElementById("pieGroup");
+const ringGroup = document.getElementById("ringGroup");
 const sidesGroup = document.getElementById("sidesGroup");
 
 presetSelect.addEventListener("change", () => {
@@ -17,6 +18,7 @@ presetSelect.addEventListener("change", () => {
     foilGroup.classList.toggle("hidden", val !== "foil");
     starGroup.classList.toggle("hidden", val !== "star");
     pieGroup.classList.toggle("hidden", val !== "pie");
+    ringGroup.classList.toggle("hidden", val !== "ring");
     sidesGroup.classList.toggle("hidden", val !== "none");
 });
 
@@ -25,6 +27,7 @@ document.getElementById("trapezoidType").addEventListener("change", drawShape);
 document.getElementById("foilPetals").addEventListener("input", drawShape);
 document.getElementById("starSpikes").addEventListener("input", drawShape);
 document.getElementById("piePercent").addEventListener("input", drawShape);
+document.getElementById("ringInnerPercent").addEventListener("input", drawShape);
 document.getElementById("generateBtn").addEventListener("click", drawShape);
 
 function sampleBezierPath(dString, sampleCount = 120) {
@@ -165,7 +168,10 @@ function getShapePoints() {
         }
 
         case "ring": {
-            const pathStr = "M 150 45 A 100 100 0 1 0 150 255 A 100 100 0 1 0 150 45 Z M 150 95 A 50 50 0 1 1 150 205 A 50 50 0 1 1 150 95 Z";
+            const pct = Math.min(Math.max(parseFloat(document.getElementById("ringInnerPercent").value) || 50, 10), 90);
+            const outerR = 100;
+            const innerR = (pct / 100) * outerR;
+            const pathStr = `M ${cx} ${cy - outerR} A ${outerR} ${outerR} 0 1 0 ${cx} ${cy + outerR} A ${outerR} ${outerR} 0 1 0 ${cx} ${cy - outerR} Z M ${cx} ${cy - innerR} A ${innerR} ${innerR} 0 1 1 ${cx} ${cy + innerR} A ${innerR} ${innerR} 0 1 1 ${cx} ${cy - innerR} Z`;
             return sampleBezierPath(pathStr, 120);
         }
     }
@@ -322,7 +328,6 @@ async function drawShape() {
     animFrameId = requestAnimationFrame(animateFrame);
 }
 
-// Copy Action Handlers
 function showToast(message) {
     const toast = document.getElementById("toast");
     toast.innerText = message;
