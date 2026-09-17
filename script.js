@@ -1,4 +1,3 @@
-// --- STATE & UTILS --- //
 let currentPathPoints = [];
 let animFrameId = null;
 
@@ -11,10 +10,8 @@ const starGroup = document.getElementById("starGroup");
 const pieGroup = document.getElementById("pieGroup");
 const sidesGroup = document.getElementById("sidesGroup");
 
-// Handle Dynamic Controls Visibility
 presetSelect.addEventListener("change", () => {
     const val = presetSelect.value;
-
     triangleGroup.classList.toggle("hidden", val !== "triangle");
     trapezoidGroup.classList.toggle("hidden", val !== "trapezoid");
     foilGroup.classList.toggle("hidden", val !== "foil");
@@ -30,7 +27,6 @@ document.getElementById("starSpikes").addEventListener("input", drawShape);
 document.getElementById("piePercent").addEventListener("input", drawShape);
 document.getElementById("generateBtn").addEventListener("click", drawShape);
 
-// Interpolate SVG path curves into uniform sampled points
 function sampleBezierPath(dString, sampleCount = 120) {
     const svgPath = document.createElementNS("http://www.w3.org/2000/svg", "path");
     svgPath.setAttribute("d", dString);
@@ -44,7 +40,6 @@ function sampleBezierPath(dString, sampleCount = 120) {
     return points;
 }
 
-// Convert points array back to smooth SVG path
 function pointsToSVGPath(points) {
     if (!points.length) return "";
     let d = `M ${points[0][0].toFixed(2)} ${points[0][1].toFixed(2)}`;
@@ -55,7 +50,6 @@ function pointsToSVGPath(points) {
     return d;
 }
 
-// --- SHAPE GENERATION LOGIC (Center = 150, 150) --- //
 function getShapePoints() {
     const preset = presetSelect.value;
     const n = parseInt(document.getElementById("numberInput").value);
@@ -64,7 +58,7 @@ function getShapePoints() {
     if (preset === "none") {
         if (isNaN(n) || n < 1) return generatePolygonPoints(4, cx, cy, 80);
         if (n === 1) return generateCirclePoints(cx, cy, 80, 120);
-        if (n === 2) return generateSemicirclePoints(cx, cy, 80, 120);
+        if (n === 2) return sampleBezierPath("M 65 150 A 85 85 0 0 1 235 150 Z", 120);
         return generatePolygonPoints(n, cx, cy, 80);
     }
 
@@ -78,8 +72,10 @@ function getShapePoints() {
         case "circle":
             return generateCirclePoints(cx, cy, 85, 120);
 
-        case "semicircle":
-            return generateSemicirclePoints(cx, cy, 85, 120);
+        case "semicircle": {
+            const pathStr = "M 65 150 A 85 85 0 0 1 235 150 Z";
+            return sampleBezierPath(pathStr, 120);
+        }
 
         case "oval":
             return generateOvalPoints(cx, cy, 65, 110, 120);
@@ -169,14 +165,13 @@ function getShapePoints() {
         }
 
         case "ring": {
-            const pathStr = "M 150 40 A 105 105 0 1 0 150 260 A 105 105 0 1 0 150 40 Z M 150 90 A 55 55 0 1 1 150 210 A 55 55 0 1 1 150 90 Z";
+            const pathStr = "M 150 45 A 100 100 0 1 0 150 255 A 100 100 0 1 0 150 45 Z M 150 95 A 50 50 0 1 1 150 205 A 50 50 0 1 1 150 95 Z";
             return sampleBezierPath(pathStr, 120);
         }
     }
     return generatePolygonPoints(4, cx, cy, 80);
 }
 
-// Helper Generators
 function generatePolygonPoints(n, cx, cy, r) {
     const pts = [];
     for (let i = 0; i < n; i++) {
@@ -201,18 +196,6 @@ function generateOvalPoints(cx, cy, rx, ry, count) {
         const a = (i / count) * 2 * Math.PI - Math.PI / 2;
         pts.push([cx + rx * Math.cos(a), cy + ry * Math.sin(a)]);
     }
-    return pts;
-}
-
-function generateSemicirclePoints(cx, cy, r, count) {
-    const pts = [];
-    const half = Math.floor(count / 2);
-    for (let i = 0; i <= half; i++) {
-        const a = Math.PI + (i / half) * Math.PI;
-        pts.push([cx + r * Math.cos(a), cy + r * Math.sin(a)]);
-    }
-    pts.push([cx - r, cy + 30]);
-    pts.push([cx + r, cy + 30]);
     return pts;
 }
 
@@ -253,7 +236,6 @@ function generatePiePoints(cx, cy, r, percent, count) {
     return pts;
 }
 
-// Uniform Point Resampling across frames
 function resamplePoints(points, targetCount = 120) {
     if (!points.length) return [];
     const resampled = [];
@@ -271,7 +253,6 @@ function resamplePoints(points, targetCount = 120) {
     return resampled;
 }
 
-// Dynamic Custom Color Name Lookup
 async function getSelectedColor() {
     const typed = document.getElementById("colorText").value.trim().toLowerCase();
     const picked = document.getElementById("colorPicker").value;
@@ -291,7 +272,6 @@ async function getSelectedColor() {
     return typed;
 }
 
-// Master Draw Function with Morph Transition Frame Interpolation
 async function drawShape() {
     const targetRawPoints = getShapePoints();
     const targetPoints = resamplePoints(targetRawPoints, 120);
@@ -342,5 +322,34 @@ async function drawShape() {
     animFrameId = requestAnimationFrame(animateFrame);
 }
 
-// Initialize Application
+// Copy Action Handlers
+function showToast(message) {
+    const toast = document.getElementById("toast");
+    toast.innerText = message;
+    toast.classList.remove("hidden");
+    setTimeout(() => toast.classList.add("hidden"), 2200);
+}
+
+document.getElementById("copyDPathBtn").addEventListener("click", () => {
+    const dAttr = morphPath.getAttribute("d");
+    navigator.clipboard.writeText(dAttr);
+    showToast("Path 'd' data copied!");
+});
+
+document.getElementById("copySvgBtn").addEventListener("click", () => {
+    const svgCode = document.getElementById("stageSvg").outerHTML;
+    navigator.clipboard.writeText(svgCode);
+    showToast("Full SVG Code copied!");
+});
+
+document.getElementById("copyCssBtn").addEventListener("click", () => {
+    if (!currentPathPoints.length) return;
+    const pointsString = currentPathPoints
+        .map(pt => `${((pt[0] / 300) * 100).toFixed(1)}% ${((pt[1] / 300) * 100).toFixed(1)}%`)
+        .join(", ");
+    const cssClip = `clip-path: polygon(${pointsString});`;
+    navigator.clipboard.writeText(cssClip);
+    showToast("CSS Clip-Path copied!");
+});
+
 drawShape();

@@ -44,7 +44,6 @@
             </select>
         </div>
 
-        <!-- Conditional Triangle Subtypes -->
         <div class="input-group hidden" id="triangleGroup">
             <label for="triangleType">Triangle Type</label>
             <select id="triangleType">
@@ -56,7 +55,6 @@
             </select>
         </div>
 
-        <!-- Conditional Trapezoid Subtypes -->
         <div class="input-group hidden" id="trapezoidGroup">
             <label for="trapezoidType">Trapezoid Type</label>
             <select id="trapezoidType">
@@ -66,19 +64,16 @@
             </select>
         </div>
 
-        <!-- Foil Petal Control -->
         <div class="input-group hidden" id="foilGroup">
             <label for="foilPetals">Foil Petals / Lobes</label>
             <input type="number" id="foilPetals" min="3" max="12" value="4">
         </div>
 
-        <!-- Star Spikes Control -->
         <div class="input-group hidden" id="starGroup">
             <label for="starSpikes">Star Points / Spikes</label>
             <input type="number" id="starSpikes" min="3" max="20" value="5">
         </div>
 
-        <!-- Pie Percentage Control -->
         <div class="input-group hidden" id="pieGroup">
             <label for="piePercent">Pie Fill Percentage (%)</label>
             <input type="number" id="piePercent" min="1" max="100" value="75">
@@ -112,7 +107,19 @@
             <path id="morphPath" fill="#4287f5" d="" />
         </svg>
     </div>
+
+    <!-- Export & Copy Section -->
+    <div class="copy-section">
+        <span class="copy-title">Copy Output</span>
+        <div class="copy-buttons">
+            <button id="copyDPathBtn" class="copy-btn">Copy Path Data (`d`)</button>
+            <button id="copySvgBtn" class="copy-btn">Copy SVG Code</button>
+            <button id="copyCssBtn" class="copy-btn">Copy CSS Clip-Path</button>
+        </div>
+    </div>
 </div>
+
+<div id="toast" class="toast hidden">Copied to clipboard!</div>
 
 <script src="script.js"></script>
 </body>

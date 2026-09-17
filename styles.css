@@ -1,7 +1,6 @@
 body {
     font-family: "ABeeZee", sans-serif;
     font-weight: 400;
-    font-style: normal;
     text-align: center;
     padding: 30px 20px;
     background: #fafafa;
@@ -119,4 +118,60 @@ label {
     transform-origin: 150px 150px;
     transition: fill 0.8s ease, transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
     will-change: d, fill, transform;
+}
+
+.copy-section {
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 2px dashed #eee;
+}
+
+.copy-title {
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #888;
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.copy-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.copy-btn {
+    background-color: #f1f3f5;
+    color: #333;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.copy-btn:hover {
+    background-color: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+.toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #333;
+    color: #fff;
+    padding: 10px 24px;
+    border-radius: 30px;
+    font-size: 14px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: opacity 0.3s ease;
+    z-index: 1000;
 }
